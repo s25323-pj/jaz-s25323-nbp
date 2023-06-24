@@ -1,6 +1,5 @@
 package com.SzyRosz.jazs25323nbp.service;
 
-import com.SzyRosz.jazs25323nbp.model.CurrencyRate;
 import com.SzyRosz.jazs25323nbp.model.NbpApiResponse;
 import com.SzyRosz.jazs25323nbp.model.NbpRate;
 import com.SzyRosz.jazs25323nbp.repository.CurrencyRateRepository;
@@ -38,7 +37,6 @@ public class CurrencyService {
         BigDecimal averageRate = BigDecimal.ZERO;
         if (!rates.isEmpty()) {
             averageRate = sumRate.divide(BigDecimal.valueOf(rates.size()), 4, RoundingMode.HALF_UP);
-            saveCurrencyRateToDatabase(currency, startDate, endDate, averageRate);
         }
         return averageRate;
     }
@@ -50,9 +48,5 @@ public class CurrencyService {
 
         NbpApiResponse response = restTemplate.getForObject(apiUrl, NbpApiResponse.class);
         return response != null ? response.getRates() : Collections.emptyList();
-    }
-    private void saveCurrencyRateToDatabase(String currency, LocalDate startDate, LocalDate endDate, BigDecimal averageRate) {
-        CurrencyRate currencyRate = new CurrencyRate(currency, startDate, endDate, averageRate);
-        currencyRateRepository.save(currencyRate);
     }
 }

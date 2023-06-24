@@ -26,14 +26,16 @@ public class CurrencyRate {
     private LocalDateTime timestamp;
 
 
-    public CurrencyRate(String currency, LocalDate startDate, LocalDate endDate, BigDecimal averageRate) {
-    }
 
     public CurrencyRate(String currency, BigDecimal rate, LocalDate date, LocalDateTime timestamp) {
         this.currency = currency;
         this.rate = rate;
         this.date = date;
         this.timestamp = timestamp;
+    }
+
+    public CurrencyRate() {
+
     }
 
     public Long getId() {
